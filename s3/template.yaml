@@ -1,8 +1,12 @@
 AWSTemplateFormatVersion : '2010-09-09'
+Transform:
+    - AWS::Serverless-2016-10-31
 
-Description: my template
+Description: Lambda CloudFormation Lab
 Resources:
-    TheBucket:
-        Type: AWS::S3::Bucket
+    MyLambda:
+        Type: AWS::Serverless::Function
         Properties:
-            BucketName: upb-may-51575
+            Handler: lambda.handler
+            Runtime: python3.6
+            CodeUri: src/

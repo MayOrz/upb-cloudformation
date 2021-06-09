@@ -1,7 +1,6 @@
-AWSTemplateFormatVersion : '2010-09-09'
+AWSTemplateFormatVersion: '2010-09-09'
 Transform:
-  - AWS::Serverless-2016-10-31
-
+- AWS::Serverless-2016-10-31
 Description: Lambda CloudFormation Lab
 Resources:
   MyLambda:
@@ -10,9 +9,11 @@ Resources:
       FunctionName: my-upb-function
       Handler: lambda.handler
       Runtime: python3.6
-      CodeUri: package/
-      Role: !GetAtt MyLambdaRole.Arn
-
+      CodeUri: s3://upb-may-51575/b9475625d5bc0d792427b832b256b87b
+      Role:
+        Fn::GetAtt:
+        - MyLambdaRole
+        - Arn
   MyLambdaRole:
     Type: AWS::IAM::Role
     Properties:
@@ -26,7 +27,7 @@ Resources:
             - lambda.amazonaws.com
           Action:
           - sts:AssumeRole
-      Path: "/"
+      Path: /
       Policies:
       - PolicyName: my-lambda-policy
         PolicyDocument:
